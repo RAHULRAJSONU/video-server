@@ -7,10 +7,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class VideoSharingDemoApplication {
+public class ContentServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(VideoSharingDemoApplication.class, args);
+        SpringApplication.run(ContentServerApplication.class, args);
     }
 
     @Bean

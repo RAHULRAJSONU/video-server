@@ -17,9 +17,9 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @Transactional
-public class VideoServiceImplIT {
+public class ContentServiceImplIT {
     @Autowired
-    VideoService service;
+    ContentService service;
 
     @Autowired
     VideoRepo repo;

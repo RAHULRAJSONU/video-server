@@ -4,7 +4,7 @@ const videoScreen = document.querySelector('#video-screen');
 
 const queryParams = Object.fromEntries(new URLSearchParams(window.location.search));
 
-fetch('http://localhost:8080/video/all')
+fetch('http://localhost:8080/api/content/video/all')
     .then(result => result.json())
     .then(result => {
 
@@ -26,7 +26,7 @@ fetch('http://localhost:8080/video/all')
 
 if(queryParams.video){
 
-    videoScreen.src = `http://localhost:8080/video/${queryParams.video}`;
+    videoScreen.src = `http://localhost:8080/api/content/video/${queryParams.video}`;
     videoDiv.style.display = 'block';
     document.querySelector('#now-playing')
         .innerText = 'Now playing ' + queryParams.video;
@@ -36,7 +36,7 @@ if(queryParams.video){
 form.addEventListener('submit', ev => {
     ev.preventDefault();
     let data = new FormData(form);
-    fetch('http://localhost:8080/video', {
+    fetch('http://localhost:8080/api/content/video', {
         method: 'POST',
         body: data
     }).then(result => result.text()).then(_ => {

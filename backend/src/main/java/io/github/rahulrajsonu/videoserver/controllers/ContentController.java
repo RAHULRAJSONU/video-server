@@ -1,6 +1,6 @@
 package io.github.rahulrajsonu.videoserver.controllers;
 
-import io.github.rahulrajsonu.videoserver.services.VideoService;
+import io.github.rahulrajsonu.videoserver.services.ContentService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -14,29 +14,27 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("video")
+@RequestMapping("api/content/video")
 @AllArgsConstructor
-public class VideoController {
+public class ContentController {
 
-    private VideoService videoService;
+    private ContentService contentService;
 
-    // Each parameter annotated with @RequestParam corresponds to a form field where the String argument is the name of the field
     @PostMapping()
     public ResponseEntity<String> saveVideo(@RequestParam("file") MultipartFile file, @RequestParam("name") String name) throws IOException {
 
-        videoService.saveVideo(file, name);
+        contentService.saveVideo(file, name);
         return ResponseEntity.ok("Video saved successfully.");
 
     }
 
-    // {name} is a path variable in the url. It is extracted as the String parameter annotated with @PathVariable
     @GetMapping("{name}")
     public ResponseEntity<Resource> getVideoByName(@PathVariable("name") String name){
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(new ByteArrayResource(videoService.getVideo(name).getData()));
+                .body(new ByteArrayResource(contentService.getVideo(name).getData()));
 
     }
 
@@ -44,7 +42,7 @@ public class VideoController {
     public ResponseEntity<List<String>> getAllVideoNames(){
 
         return ResponseEntity
-                .ok(videoService.getAllVideoNames());
+                .ok(contentService.getAllVideoNames());
 
     }
 

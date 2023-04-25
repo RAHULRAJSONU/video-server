@@ -15,9 +15,9 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class VideoServiceImplTest {
+class ContentServiceImplTest {
     VideoRepo repo = mock(VideoRepo.class);
-    VideoService service = new VideoServiceImpl(repo);
+    ContentService service = new ContentServiceImpl(repo);
     String testName = "myVid";
 
     @Test

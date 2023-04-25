@@ -1,7 +1,7 @@
 package io.github.rahulrajsonu.videoserver.services;
 
-import io.github.rahulrajsonu.videoserver.exceptions.VideoAlreadyExistsException;
-import io.github.rahulrajsonu.videoserver.exceptions.VideoNotFoundException;
+import io.github.rahulrajsonu.videoserver.exceptions.ContentAlreadyExistsException;
+import io.github.rahulrajsonu.videoserver.exceptions.ContentNotFoundException;
 import io.github.rahulrajsonu.videoserver.domain.Video;
 import io.github.rahulrajsonu.videoserver.repo.VideoRepo;
 import lombok.AllArgsConstructor;
@@ -13,14 +13,14 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class VideoServiceImpl implements VideoService {
+public class ContentServiceImpl implements ContentService {
 
     private VideoRepo repo;
 
     @Override
     public Video getVideo(String name) {
         if(!repo.existsByName(name)){
-            throw new VideoNotFoundException();
+            throw new ContentNotFoundException();
         }
         return repo.findByName(name);
     }
@@ -33,7 +33,7 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public void saveVideo(MultipartFile file, String name) throws IOException {
         if(repo.existsByName(name)){
-            throw new VideoAlreadyExistsException();
+            throw new ContentAlreadyExistsException();
         }
         Video newVid = new Video(name, file.getBytes());
         repo.save(newVid);
